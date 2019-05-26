@@ -16,7 +16,7 @@ spd_walk_damping_frame0 = spd_walk * 0.2
 spd_walk_damping_frame1 = spd_walk * 0.5
 
 spd_run_image_speed = spd_run * 0.5;
-spd_run_damping_frame0 = spd_walk + ((spd_run - spd_walk) * 0.33)
+spd_run_damping_frame0 = spd_walk + ((spd_run - spd_walk) * 0.2)
 spd_run_damping_frame1 = spd_walk + ((spd_run - spd_walk) * 0.66)
 
 

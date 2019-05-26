@@ -73,11 +73,11 @@ if(state == "run_start")
 {
 	set_state_sprite(s_player_run, spd_run_image_speed, 0);
 	
-	if(animation_hit_frame_range(0, 2))
+	if(animation_hit_frame_range(0, 1))
 	{
 		movement = spd_run_damping_frame0 * look_dir;	
 	}
-	else if(animation_hit_frame_range(2, 4))
+	else if(animation_hit_frame_range(1, 3))
 	{
 		movement = spd_run_damping_frame1 * look_dir;	
 	}
@@ -89,7 +89,15 @@ if(state == "run_start")
 
 if(state == "run")
 {
-	if(input.move_runright)
+	if (input.notmoving || (input.move_runleft && look_dir = 1)
+		|| (input.move_runright && look_dir = -1) 
+		|| input.move_left || input.move_right)
+	{
+		show_debug_message("run abort");
+		state = "run_end";
+		reset_state_sprite(s_player_walk, spd_walk_image_speed, 10)
+	}
+	else if(input.move_runright)
 	{
 		movement = spd_run;
 		look_dir = 1;
@@ -99,12 +107,7 @@ if(state == "run")
 		movement = -spd_run;
 		look_dir = -1;
 	}
-	else
-	{
-		show_debug_message("run abort");
-		state = "run_end";
-		reset_state_sprite(s_player_walk, spd_walk_image_speed, 10)
-	}
+
 }
 
 if(state == "run_end")
@@ -124,10 +127,6 @@ if(state == "run_end")
 	if(input.move_right || input.move_left)
 	{
 		state = "walk"
-	}
-	else if(input.move_runright || input.move_runleft)
-	{
-		state = "run";	
 	}
 	else
 	{
@@ -161,13 +160,13 @@ if(state == "idle")
 		look_dir = -1;
 	}
 	
-	if (input.runright)
+	if (input.move_runright)
 	{
 		state = "run_start";
 		look_dir = 1;
 	}
 
-	if (input.runleft) 
+	if (input.move_runleft) 
 	{
 		state = "run_start";
 		look_dir = -1;
