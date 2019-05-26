@@ -1,27 +1,202 @@
 var movement = 0;
 
-#region "State: Idle/Movement"
-if (state == "move")
+
+
+#region "walking"
+if(state == "walk_start")
 {
-	if (input.right)
+	set_state_sprite(s_player_walk, spd_walk_image_speed, 0);
+	
+	if(animation_hit_frame_range(0, 0))
+	{
+		movement = spd_walk_damping_frame0 * look_dir;	
+	}
+	else if(animation_hit_frame_range(1, 2))
+	{
+		movement = spd_walk_damping_frame1 * look_dir;	
+	}
+	else if(image_index > 2)
+	{
+		state = "walk";
+	}
+}
+
+if(state == "walk")
+{
+	if(input.notmoving || (input.move_left && look_dir = 1) || (input.move_right && look_dir = -1))
+	{
+		show_debug_message("input abort");
+		state = "walk_end";
+		reset_state_sprite(s_player_walk, spd_walk_image_speed, 10)
+	}
+	else if(input.move_right)
 	{
 		movement = spd_walk;
-		image_xscale = 1;
-		sprite_index = s_player_walk;
-		image_speed = spd_walk_image_speed;
 		look_dir = 1;
-		
-		if(animation_hit_frame(1)) show_debug_message(image_index);
 	}
-
-	if (input.left) 
+	else if(input.move_left)
 	{
 		movement = -spd_walk;
-		image_xscale = -1;
-		sprite_index = s_player_walk;
-		image_speed = spd_walk_image_speed;
 		look_dir = -1;
 	}
+	else if(input.move_runright)
+	{
+		look_dir = 1;
+		state = "run_start";
+	}
+	else if(input.move_runleft)
+	{
+		look_dir = -1;
+		state = "run_start";
+	}
+}
+
+if(state == "walk_end")
+{
+	//if(animation_hit_frame_range(10, 10))
+	//{
+	//	movement = spd_walk_damping_frame1 * look_dir;	
+	//}
+	//else if(animation_hit_frame_range(11, 11))
+	//{
+	//	movement = spd_walk_damping_frame0 * look_dir;	
+	//}
+	//else if(animation_hit_frame_range(0,7))
+	//{
+	state = "idle";
+	//}
+}
+#endregion
+
+#region "running
+if(state == "run_start")
+{
+	set_state_sprite(s_player_run, spd_run_image_speed, 0);
+	
+	if(animation_hit_frame_range(0, 2))
+	{
+		movement = spd_run_damping_frame0 * look_dir;	
+	}
+	else if(animation_hit_frame_range(2, 4))
+	{
+		movement = spd_run_damping_frame1 * look_dir;	
+	}
+	else if(image_index > 3)
+	{
+		state = "run";
+	}
+}
+
+if(state == "run")
+{
+	if(input.move_runright)
+	{
+		movement = spd_run;
+		look_dir = 1;
+	}
+	else if(input.move_runleft)
+	{
+		movement = -spd_run;
+		look_dir = -1;
+	}
+	else
+	{
+		show_debug_message("run abort");
+		state = "run_end";
+		reset_state_sprite(s_player_walk, spd_walk_image_speed, 10)
+	}
+}
+
+if(state == "run_end")
+{
+
+	//if(animation_hit_frame_range(10, 10))
+	//{
+	//	movement = spd_walk_damping_frame1 * look_dir;	
+	//}
+	//else if(animation_hit_frame_range(11, 11))
+	//{
+	//	movement = spd_walk_damping_frame0 * look_dir;	
+	//}
+	//else if(animation_hit_frame_range(0,7))
+	//{
+	
+	if(input.move_right || input.move_left)
+	{
+		state = "walk"
+	}
+	else if(input.move_runright || input.move_runleft)
+	{
+		state = "run";	
+	}
+	else
+	{
+		state = "idle";
+	}
+	
+	//	state = "idle";
+	//}
+	
+
+}
+
+
+#endregion
+
+#region "Idle"
+
+if(state == "idle")
+{
+	set_state_sprite(s_player_idle, spd_idle_image_speed, 0)
+
+	if (input.move_right)
+	{
+		state = "walk_start";
+		look_dir = 1;
+	}
+	
+	if (input.move_left) 
+	{
+		state = "walk_start";
+		look_dir = -1;
+	}
+	
+	if (input.runright)
+	{
+		state = "run_start";
+		look_dir = 1;
+	}
+
+	if (input.runleft) 
+	{
+		state = "run_start";
+		look_dir = -1;
+	}
+}
+#endregion
+
+dbg(state + " | l: " + string(input.move_left) + " | r: " + string(input.move_right) + " | rl: " + string(input.move_runleft) + " | rr: " + string(input.move_runright))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --- Alter Code
+
+if (state == "move")
+{
+
 	
 	if (input.runright)
 	{
@@ -43,8 +218,7 @@ if (state == "move")
 
 	if (input.notmoving)
 	{
-		sprite_index = s_player_idle;
-		image_speed = spd_idle_image_speed;
+
 	}
 	
 	// State Changes while moving
@@ -116,4 +290,5 @@ if(state = "attack1combo")
 
 #endregion
 
+image_xscale = look_dir;
 move_and_collide(movement);
