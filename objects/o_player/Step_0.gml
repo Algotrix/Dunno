@@ -10,6 +10,8 @@ if (state == "move")
 		sprite_index = s_player_walk;
 		image_speed = spd_walk_image_speed;
 		look_dir = 1;
+		
+		if(animation_hit_frame(1)) show_debug_message(image_index);
 	}
 
 	if (input.left) 
@@ -18,6 +20,24 @@ if (state == "move")
 		image_xscale = -1;
 		sprite_index = s_player_walk;
 		image_speed = spd_walk_image_speed;
+		look_dir = -1;
+	}
+	
+	if (input.runright)
+	{
+		movement = spd_run;
+		image_xscale = 1;
+		sprite_index = s_player_run;
+		image_speed = spd_run_image_speed;
+		look_dir = 1;
+	}
+
+	if (input.runleft) 
+	{
+		movement = -spd_run;
+		image_xscale = -1;
+		sprite_index = s_player_run;
+		image_speed = spd_run_image_speed;
 		look_dir = -1;
 	}
 
@@ -96,15 +116,4 @@ if(state = "attack1combo")
 
 #endregion
 
-
-#region "Collision"
-if (place_meeting(x + movement, y, o_wall))
-{
-	while(place_meeting(x + movement, y, o_wall) && movement != 0)
-	{
-			movement -= look_dir;
-	}
-}
-#endregion
-
-x += movement;
+move_and_collide(movement);

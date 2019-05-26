@@ -1,5 +1,7 @@
 left = keyboard_check(vk_left);
 right = keyboard_check(vk_right);
+runleft = keyboard_check(vk_left) && keyboard_check(vk_lshift);
+runright = keyboard_check(vk_right) && keyboard_check(vk_lshift);
 jump = keyboard_check_pressed(vk_up);
 attack1 = keyboard_check_pressed(vk_space);
 attack2 = keyboard_check_pressed(vk_lcontrol);
