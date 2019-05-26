@@ -1,0 +1,20 @@
+-- Ressourcen:
+Menü: pixelgamekit
+Enemies: zombiepackage
+
+
+-- Ideen:
+
+Bosskämpfe: Man nimmt eine Potion auf und wird riesig und kämpft dann gegen einen großen boss
+
+Gegner: Hunde, die am Boden rumlaufen und nicht angreifbar sind. Man muss über sie springen
+Evtl nem Möglichkeit für nen "Kick" um die Hunde doch zu töten, müsste ich evtl hinkrigen als animation
+
+Mechanik: Ducken. Gegner können auch ab und zu schiessen. Wird man getroffen stolpert man. (von beiden Richtungen hehe)
+
+Elite-Gegner mit roter Farbe
+
+Später Spiel erweitern:
+
+Upgrade: Mouse Aim. Man kann jetzt mit der Maus gezielt schießen und aimen
+Upgrade: Jetpack. Eröffnet die Map nach oben. Von hier können auch Zombies kommen in späteren Leveln
