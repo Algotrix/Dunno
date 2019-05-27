@@ -12,7 +12,6 @@ if (place_meeting(x + movement, y, o_wall))
 			{
 				movement = 0;
 			}
-			dbg(movement)
 	}
 }
 

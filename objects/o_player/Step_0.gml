@@ -1,4 +1,5 @@
 var movement = 0;
+var hitbox_visible = false;
 
 #region "Push out of blocks"
 if(place_meeting(x, y, o_wall))
@@ -225,8 +226,13 @@ if(state == "run_end")
 #region "Attacking"
 if(state == "attack1")
 {
-	movement = last_movement * 0.91;
+	movement = velocity_x * 0.91;
 	set_state_sprite(s_player_attack1, spd_attack1, 0);
+	
+	if(animation_hit_frame(4))
+	{
+		create_hitbox(x, y, look_dir, self, s_player_attack1_hit, attack1_knockback, 8, attack1_dmg, hitbox_visible);
+	}
 	
 	if(input.attack2 && animation_hit_frame_range(5, 8))
 	{
@@ -255,7 +261,12 @@ if(state == "attack1combo")
 		statecombo = "";
 	}
 	
-	movement = last_movement * 0.8;
+	if(animation_hit_frame(4))
+	{
+		create_hitbox(x, y, look_dir, self, s_player_attack1_hit, attack1combo_knockback, 8, attack1combo_dmg, hitbox_visible);
+	}
+	
+	movement = velocity_x * 0.8;
 
 	if(animation_end())
 	{
@@ -265,8 +276,15 @@ if(state == "attack1combo")
 
 if(state == "attack2")
 {
-	movement = last_movement * 0.8;
+	movement = velocity_x * 0.8;
 	set_state_sprite(s_player_attack2, spd_attack1, 0);
+	
+	if(animation_hit_frame(3))
+	{
+		var ammo = instance_create_layer(x, y, "Instances", o_ammo);	
+		ammo.sprite = s_player_attack2_ammo;
+		ammo.move_dir = spd_attack2_flyspeed * look_dir; 
+	}
 	
 	if(animation_end())
 	{
@@ -280,7 +298,7 @@ if (state == "jump")
 {
 	set_state_sprite(s_player_jump, spd_jump_image_speed, 0);
 	
-	if(movement_jump_start == 0) movement_jump_start = last_movement;
+	if(movement_jump_start == 0) movement_jump_start = velocity_x;
 	
 	if(image_index < 2)
 	{
@@ -346,6 +364,18 @@ if(state == "idle")
 	}
 }
 
+if(state == "knockback")
+{
+	set_state_sprite(s_player_hit, 1, 0);
+	movement -= spd_knockback * look_dir;
+		
+	if(animation_end())
+	{
+		image_speed = 0;
+		state = "idle";
+	}
+}
+
 
 #endregion
 
@@ -353,5 +383,5 @@ if(state == "idle")
 //dbg(state + " | " + "m: " + string(movement) + " | l: " + string(input.move_left) + " | r: " + string(input.move_right) + " | rl: " + string(input.move_runleft) + " | rr: " + string(input.move_runright))
 
 image_xscale = look_dir;
-last_movement = movement;
+velocity_x = movement;
 move_and_collide(movement);
