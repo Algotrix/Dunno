@@ -3,9 +3,16 @@ var movement = argument0;
 
 if (place_meeting(x + movement, y, o_wall))
 {
-	while(place_meeting(x + movement, y, o_wall) && movement != 0)
+
+	while(place_meeting(x + movement, y, o_wall) && (movement != 0))
 	{
-			movement -= look_dir;
+			lastsign = sign(movement);
+			movement -= sign(movement);
+			if(lastsign != sign(movement))
+			{
+				movement = 0;
+			}
+			dbg(movement)
 	}
 }
 

@@ -1,5 +1,28 @@
 var movement = 0;
 
+#region "Push out of blocks"
+if(place_meeting(x, y, o_wall))
+{
+	px_left = 0;
+	px_right = 0;
+	
+	while(place_meeting(x - px_left, y, o_wall)) px_left += 1;	
+	while(place_meeting(x + px_right, y, o_wall)) px_right += 1;	
+
+	dbg("pxleft " + string(px_left))
+	dbg("pxright " + string(px_right))
+	
+	if(px_left < px_right)
+	{
+		x -= 3//px_left;
+	}
+	else
+	{
+		x += 3//px_right;	
+	}
+}
+#endregion
+
 #region "Walking"
 if(state == "walk_start")
 {
