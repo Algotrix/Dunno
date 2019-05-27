@@ -23,3 +23,6 @@ else
 	move_runleft = runmodifier && left;
 	move_runright = runmodifier && right;
 }
+
+move_walking = move_left || move_right;
+move_running = move_runleft || move_runright;

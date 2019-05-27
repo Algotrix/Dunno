@@ -1,7 +1,7 @@
 // base definitions
 spd_walk = 1;
 spd_run = 2;
-spd_jump = 2.3; // how far you jump (speed while jumping)
+spd_jump_multi = 1.5; // how far you jump (speed while jumping)
 spd_jump_image_speed = 1.2; // how long you stay in the air
 
 spd_attack1 = 1;
@@ -25,6 +25,9 @@ state = "idle";
 statecombo = "";
 staterunning = "";
 look_dir = 1;
+last_movement = 0;
+
+movement_jump_start = 0;
 
 // instances
 input = instance_create_layer(0, 0, "Instances", o_input);
