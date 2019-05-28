@@ -1,5 +1,5 @@
-var movement = 0;
 var hitbox_visible = false;
+movement = 0;
 
 #region "Push out of blocks"
 if(place_meeting(x, y, o_wall))
@@ -27,15 +27,15 @@ if(place_meeting(x, y, o_wall))
 #region "Walking"
 if(state == "walk_start")
 {
-	set_state_sprite(s_player_walk, spd_walk_image_speed, 0);
+	set_state_sprite(s_player_walk, walk_spd_image_speed, 0);
 	
 	if(animation_hit_frame_range(0, 0))
 	{
-		movement = spd_walk_damping_frame0 * look_dir;	
+		movement = walk_spd_damping_frame0 * look_dir;	
 	}
 	else if(animation_hit_frame_range(1, 2))
 	{
-		movement = spd_walk_damping_frame1 * look_dir;	
+		movement = walk_spd_damping_frame1 * look_dir;	
 	}
 	else if(image_index > 2)
 	{
@@ -64,16 +64,16 @@ if(state == "walk")
 	{
 		show_debug_message("input abort");
 		state = "walk_end";
-		reset_state_sprite(s_player_walk, spd_walk_image_speed, 10)
+		reset_state_sprite(s_player_walk, walk_spd_image_speed, 10)
 	}
 	else if(input.move_right)
 	{
-		movement = spd_walk;
+		movement = walk_spd;
 		look_dir = 1;
 	}
 	else if(input.move_left)
 	{
-		movement = -spd_walk;
+		movement = -walk_spd;
 		look_dir = -1;
 	}
 	else if(input.move_runright)
@@ -107,11 +107,11 @@ if(state == "walk_end")
 {
 	//if(animation_hit_frame_range(10, 10))
 	//{
-	//	movement = spd_walk_damping_frame1 * look_dir;	
+	//	movement = walk_spd_damping_frame1 * look_dir;	
 	//}
 	//else if(animation_hit_frame_range(11, 11))
 	//{
-	//	movement = spd_walk_damping_frame0 * look_dir;	
+	//	movement = walk_spd_damping_frame0 * look_dir;	
 	//}
 	//else if(animation_hit_frame_range(0,7))
 	//{
@@ -123,15 +123,15 @@ if(state == "walk_end")
 #region "Running
 if(state == "run_start")
 {
-	set_state_sprite(s_player_run, spd_run_image_speed, 0);
+	set_state_sprite(s_player_run, run_spd_image_speed, 0);
 	
 	if(animation_hit_frame_range(0, 1))
 	{
-		movement = spd_run_damping_frame0 * look_dir;	
+		movement = run_spd_damping_frame0 * look_dir;	
 	}
 	else if(animation_hit_frame_range(1, 3))
 	{
-		movement = spd_run_damping_frame1 * look_dir;	
+		movement = run_spd_damping_frame1 * look_dir;	
 	}
 	else if(image_index > 3)
 	{
@@ -162,16 +162,16 @@ if(state == "run")
 	{
 		show_debug_message("run abort");
 		state = "run_end";
-		reset_state_sprite(s_player_walk, spd_walk_image_speed, 10)
+		reset_state_sprite(s_player_walk, walk_spd_image_speed, 10)
 	}
 	else if(input.move_runright)
 	{
-		movement = spd_run;
+		movement = run_spd;
 		look_dir = 1;
 	}
 	else if(input.move_runleft)
 	{
-		movement = -spd_run;
+		movement = -run_spd;
 		look_dir = -1;
 	}
 	
@@ -196,11 +196,11 @@ if(state == "run_end")
 
 	//if(animation_hit_frame_range(10, 10))
 	//{
-	//	movement = spd_walk_damping_frame1 * look_dir;	
+	//	movement = walk_spd_damping_frame1 * look_dir;	
 	//}
 	//else if(animation_hit_frame_range(11, 11))
 	//{
-	//	movement = spd_walk_damping_frame0 * look_dir;	
+	//	movement = walk_spd_damping_frame0 * look_dir;	
 	//}
 	//else if(animation_hit_frame_range(0,7))
 	//{
@@ -227,7 +227,7 @@ if(state == "run_end")
 if(state == "attack1")
 {
 	movement = velocity_x * 0.91;
-	set_state_sprite(s_player_attack1, spd_attack1, 0);
+	set_state_sprite(s_player_attack1, attack1_spd, 0);
 	
 	if(animation_hit_frame(4))
 	{
@@ -257,7 +257,7 @@ if(state == "attack1combo")
 {
 	if(statecombo != "")
 	{
-		reset_state_sprite(s_player_attack1, spd_attack1combo, 0);
+		reset_state_sprite(s_player_attack1, attack1combo_spd, 0);
 		statecombo = "";
 	}
 	
@@ -277,13 +277,14 @@ if(state == "attack1combo")
 if(state == "attack2")
 {
 	movement = velocity_x * 0.8;
-	set_state_sprite(s_player_attack2, spd_attack1, 0);
+	set_state_sprite(s_player_attack2, attack2_spd, 0);
 	
 	if(animation_hit_frame(3))
 	{
 		var ammo = instance_create_layer(x, y, "Instances", o_ammo);	
 		ammo.sprite = s_player_attack2_ammo;
-		ammo.move_dir = spd_attack2_flyspeed * look_dir; 
+		ammo.move_dir = attack2_fly_spd * look_dir; 
+		ammo.damage = attack2_dmg;
 	}
 	
 	if(animation_end())
@@ -296,7 +297,7 @@ if(state == "attack2")
 #region "Jumping"
 if (state == "jump")
 {
-	set_state_sprite(s_player_jump, spd_jump_image_speed, 0);
+	set_state_sprite(s_player_jump, jump_image_speed_multi, 0);
 	
 	if(movement_jump_start == 0) movement_jump_start = velocity_x;
 	
@@ -307,7 +308,7 @@ if (state == "jump")
 	}
 	else
 	{
-		movement = movement_jump_start * spd_jump_multi;
+		movement = movement_jump_start * jump_spd_multi;
 	}
 	
 	if(animation_end())
@@ -322,7 +323,7 @@ if (state == "jump")
 
 if(state == "idle")
 {
-	set_state_sprite(s_player_idle, spd_idle_image_speed, 0)
+	set_state_sprite(s_player_idle, idle_image_speed, 0)
 
 	if (input.move_right)
 	{
@@ -366,14 +367,7 @@ if(state == "idle")
 
 if(state == "knockback")
 {
-	set_state_sprite(s_player_hit, 1, 0);
-	movement -= spd_knockback * look_dir;
-		
-	if(animation_end())
-	{
-		image_speed = 0;
-		state = "idle";
-	}
+	knockback_state(s_player_hit, "idle");
 }
 
 
@@ -382,6 +376,7 @@ if(state == "knockback")
 //dbg(movement)
 //dbg(state + " | " + "m: " + string(movement) + " | l: " + string(input.move_left) + " | r: " + string(input.move_right) + " | rl: " + string(input.move_runleft) + " | rr: " + string(input.move_runright))
 
-image_xscale = look_dir;
+if(look_dir != 0) image_xscale = look_dir;
 velocity_x = movement;
+
 move_and_collide(movement);

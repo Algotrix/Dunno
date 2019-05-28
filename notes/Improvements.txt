@@ -1,0 +1,1 @@
+animation_end: triggert schon im 1. Real-Frame des letzten Animations-Frames, so dass es kaum zu sehen ist.

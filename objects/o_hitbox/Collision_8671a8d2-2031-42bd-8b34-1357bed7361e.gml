@@ -11,5 +11,6 @@ if(creator == noone || creator == other || ds_list_find_index(hit_objects, other
 other.hp -= damage;
 ds_list_add(hit_objects, other);
 other.state = "knockback";
-other.spd_knockback = knockback;
+other.spd_knockback = knockback * image_xscale;
 dbg(other.hp);
+
