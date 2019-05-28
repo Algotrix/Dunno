@@ -3,7 +3,7 @@
 
 
 
-if(creator == noone || creator == other || ds_list_find_index(hit_objects, other) >= 0)
+if(creator == noone || creator == other || !once("hit"))
 {
 	exit;	
 }

@@ -1,6 +1,11 @@
 movement = 0;
 var hitbox_visible = false;
 
+if(wait("die", 200))
+{
+	instance_destroy(self)	;
+}
+
 switch (state)
 {
 	case "chase":
