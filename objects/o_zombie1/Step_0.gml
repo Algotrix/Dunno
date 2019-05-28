@@ -11,8 +11,11 @@ switch (state)
 		if(look_dir == 0) look_dir = 1;
 		
 		var distance = point_distance(x, y, o_player.x, o_player.y);
-
-		if(distance > attack_distance)
+		if(distance > release_distance)
+		{
+			state = "idle";
+		}
+		else if(between(distance, attack_distance, release_distance))
 		{
 			movement = walk_spd * look_dir;
 		}
@@ -30,18 +33,31 @@ switch (state)
 		
 		if(animation_hit_frame(2))
 		{
-			create_hitbox(x, y, look_dir, self, s_zombie1_hitbox1, attack1_knockback, 8, attack1_damage, hitbox_visible);
+			create_hitbox(x, y, look_dir, self, s_zombie1_hitbox1, attack1_knockback, 8, attack1_dmg, hitbox_visible);
 		}
 	
 		if(animation_hit_frame(7))
 		{
-			create_hitbox(x, y, look_dir, self, s_zombie1_hitbox2, attack2_knockback, 8, attack2_damage, hitbox_visible);
+			create_hitbox(x, y, look_dir, self, s_zombie1_hitbox2, attack2_knockback, 8, attack2_dmg, hitbox_visible);
 		}
 		break;
 	}
 	case "knockback":
 	{
 		knockback_state(s_zombie1_knockback, "chase");
+		break;
+	}
+	case "idle":
+	{
+		set_state_sprite(s_zombie1_idle, attack1_spd, 0);
+		
+		var distance = point_distance(x, y, o_player.x, o_player.y);
+
+		if(distance <= chase_distance)
+		{
+			state = "chase";
+		}
+		
 	}
 }
 
