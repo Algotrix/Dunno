@@ -285,6 +285,8 @@ if(state == "attack2")
 		ammo.sprite = s_player_attack2_ammo;
 		ammo.move_dir = attack2_fly_spd * look_dir; 
 		ammo.damage = attack2_dmg;
+		ammo.knockback = attack2_knockback;
+		ammo.creator = self;
 	}
 	
 	if(animation_end())

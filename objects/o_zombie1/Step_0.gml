@@ -1,9 +1,9 @@
 movement = 0;
 var hitbox_visible = false;
 
-if(wait("die", 200))
+if(!instance_exists(o_player))
 {
-	instance_destroy(self)	;
+	state = "idle";
 }
 
 switch (state)
@@ -56,11 +56,14 @@ switch (state)
 	{
 		set_state_sprite(s_zombie1_idle, attack1_spd, 0);
 		
-		var distance = point_distance(x, y, o_player.x, o_player.y);
-
-		if(distance <= chase_distance)
+		if(instance_exists(o_player))
 		{
-			state = "chase";
+			var distance = point_distance(x, y, o_player.x, o_player.y);
+
+			if(distance <= chase_distance)
+			{
+				state = "chase";
+			}
 		}
 		
 	}
