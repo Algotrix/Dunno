@@ -271,6 +271,14 @@
             }
         },
         {
+            "Key": "7a3432c9-f65f-473b-8c50-b710efca7250",
+            "Value": {
+                "id": "3fe6d760-d92e-45da-94e7-b714d39b5263",
+                "resourcePath": "sprites\\s_zombie1_die\\s_zombie1_die.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "852f8f6a-33e3-41be-b6e9-ee52b2ce9611",
             "Value": {
                 "id": "02e7a4bd-51cb-4013-9994-864b1d8a0c6d",
@@ -380,6 +388,14 @@
                 "id": "bd77f1b8-7d1f-460c-8965-acd83744b989",
                 "resourcePath": "sprites\\s_zombie1_idle\\s_zombie1_idle.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "a78382b8-d5d0-45b9-b85f-7eb46ffd8070",
+            "Value": {
+                "id": "b694bcb4-8c94-43ab-b083-24bed5f1228a",
+                "resourcePath": "scripts\\die_state\\die_state.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -543,6 +559,14 @@
             }
         },
         {
+            "Key": "c52e5c65-c8cc-49e7-990c-c26937f37ba4",
+            "Value": {
+                "id": "f1d6ac11-2ecc-46de-bc53-c0a7b8fbbfd8",
+                "resourcePath": "sprites\\s_player_die\\s_player_die.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "c66314b8-ee32-4c8d-88ef-52c09de41596",
             "Value": {
                 "id": "56d17941-c120-42f1-8126-fd2c61bb3b24",
@@ -556,6 +580,14 @@
                 "id": "380df95f-2720-4078-9009-c60ea1fb0703",
                 "resourcePath": "scripts\\animation_hit_frame_range\\animation_hit_frame_range.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "c9fc9c79-c773-4e52-8b5c-d7346433a626",
+            "Value": {
+                "id": "a1008528-6f81-4a49-a206-a15df65fe6e2",
+                "resourcePath": "sprites\\s_heart16\\s_heart16.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -775,6 +807,7 @@
         "b41edd80-93e6-40e7-9cfa-1600a29c782f",
         "9d9e806f-bd5a-40b0-9c6e-80cacd914cd0",
         "8fda97c5-0d75-42d1-9084-bf1610119998",
+        "a78382b8-d5d0-45b9-b85f-7eb46ffd8070",
         "017f12ff-7578-4023-ac59-b8fbfd4102a0",
         "3e12c30b-bcd7-4c68-b8d8-d9eff92b078f",
         "ed5238bd-0788-4215-ad8b-ac7ce5aa49ab",

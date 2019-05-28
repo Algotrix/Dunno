@@ -1,16 +1,15 @@
 movement = 0;
 var hitbox_visible = false;
 
-if(!instance_exists(o_player))
-{
-	state = "idle";
-}
-
 switch (state)
 {
 	case "chase":
 		set_state_sprite(s_zombie1_walk, walk_spd_image_speed, 0);
-		if !instance_exists(o_player) exit;
+		if(!instance_exists(o_player) || o_player.state = "die")
+		{
+			state = "idle";
+			break;
+		}
 		
 		look_dir = sign(o_player.x - x);
 		if(look_dir == 0) look_dir = 1;
@@ -28,14 +27,12 @@ switch (state)
 		{
 			state = "attack";	
 		}
-	
+
 		break;
 	case "attack":
 	{
 		set_state_sprite(s_zombie1_attack, attack1_spd, 0);
-		
-		// hitbox Fr 2 , 8
-		
+
 		if(animation_hit_frame(2))
 		{
 			create_hitbox(x, y, look_dir, self, s_zombie1_hitbox1, attack1_knockback, 8, attack1_dmg, hitbox_visible);
@@ -44,6 +41,11 @@ switch (state)
 		if(animation_hit_frame(7))
 		{
 			create_hitbox(x, y, look_dir, self, s_zombie1_hitbox2, attack2_knockback, 8, attack2_dmg, hitbox_visible);
+		}
+		
+		if(animation_end())
+		{
+			state = "chase";	
 		}
 		break;
 	}
@@ -54,7 +56,13 @@ switch (state)
 	}
 	case "idle":
 	{
-		set_state_sprite(s_zombie1_idle, attack1_spd, 0);
+		set_state_sprite(s_zombie1_idle, idle_image_speed, 0);
+
+		if(!instance_exists(o_player) || o_player.state = "die")
+		{
+			state = "idle";
+			break;
+		}
 		
 		if(instance_exists(o_player))
 		{
@@ -65,8 +73,13 @@ switch (state)
 				state = "chase";
 			}
 		}
-		
+		break;
 	}
+	case "die":
+	{
+		die_state(s_zombie1_die);
+		break;
+	}	
 }
 
 if(look_dir != 0) image_xscale = look_dir;

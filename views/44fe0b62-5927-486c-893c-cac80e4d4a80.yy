@@ -10,7 +10,8 @@
         "e10bb0d1-e370-4a41-be8e-085352c6453c",
         "744649d6-7f01-4c51-b013-2f76b2c448d1",
         "8bd6a222-f221-4f0c-8103-0e180e2dfb39",
-        "657e4724-0e96-4dcb-b6b4-1ee562e765eb"
+        "657e4724-0e96-4dcb-b6b4-1ee562e765eb",
+        "7a3432c9-f65f-473b-8c50-b710efca7250"
     ],
     "filterType": "GMSprite",
     "folderName": "enemy_zombie1",

@@ -2,5 +2,5 @@
 // Sie können Ihren Code in diesem Editor schreiben
 if(hp <= 0)
 {
-	instance_destroy();
+	state = "die";
 }

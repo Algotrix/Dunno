@@ -8,10 +8,10 @@ for(i = 0; i < hearts ; i++)
 {
 	if(i = hearts - 1)
 	{
-		draw_sprite(s_heart, 5 - (player.hp % 5), 32, 32 * (i + 1));	
+		draw_sprite(s_heart16, 5 - (player.hp % 5), 16, 16 * (i + 1));	
 	}
 	else
 	{
-		draw_sprite(s_heart, 0, 32, 32 * (i + 1)); 
+		draw_sprite(s_heart16, 0, 16, 16 * (i + 1)); 
 	}
 }

@@ -293,6 +293,20 @@
             "value": "0.8",
             "varName": "idle_image_speed",
             "varType": 0
+        },
+        {
+            "id": "f5eec713-0df4-4181-83d1-0066890285d5",
+            "modelName": "GMObjectProperty",
+            "mvc": "1.0",
+            "listItems": null,
+            "multiselect": false,
+            "rangeEnabled": false,
+            "rangeMax": 10,
+            "rangeMin": 0,
+            "resourceFilter": 1023,
+            "value": "300",
+            "varName": "die_corpsetime",
+            "varType": 1
         }
     ],
     "solid": false,

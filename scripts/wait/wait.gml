@@ -4,6 +4,8 @@ var token = argument0;
 var calls = argument1;
 var loop = true;
 
+if(calls < 0) return false;
+
 if(!variable_instance_exists(self, "__wait"))
 {
 	__wait = ds_map_create();

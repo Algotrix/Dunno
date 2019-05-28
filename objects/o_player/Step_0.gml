@@ -372,10 +372,15 @@ if(state == "knockback")
 	knockback_state(s_player_hit, "idle");
 }
 
+if(state == "die")
+{
+	die_state(s_player_die);
+}	
+
 
 #endregion
 
-//dbg(movement)
+dbg(movement)
 //dbg(state + " | " + "m: " + string(movement) + " | l: " + string(input.move_left) + " | r: " + string(input.move_right) + " | rl: " + string(input.move_runleft) + " | rr: " + string(input.move_runright))
 
 if(look_dir != 0) image_xscale = look_dir;
